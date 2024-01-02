@@ -8,7 +8,7 @@ class FragTrap: virtual public ClapTrap
         FragTrap();
         FragTrap( std::string name );
         FragTrap( const FragTrap &object );
-        ~FragTrap() override;
+        ~FragTrap();
         FragTrap    &operator=( const FragTrap &object );
         void        highFivesGuys(void);
         void        attack( FragTrap &target );

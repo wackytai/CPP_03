@@ -21,10 +21,10 @@ class ClapTrap
         void            takeDamage( unsigned int amount );
         void            beRepaired( unsigned int amount );
         ClapTrap&       operator=( const ClapTrap& object );
-        std::string     getName();
-        unsigned int    getHealth();
-        unsigned int    getEnergy();
-        unsigned int    getDamage();
+        std::string     getName() const;
+        unsigned int    getHealth() const;
+        unsigned int    getEnergy() const;
+        unsigned int    getDamage() const;
         void            setName( std::string name );
         void            setHealth( unsigned int amount );
         void            setEnergy( unsigned int amount );

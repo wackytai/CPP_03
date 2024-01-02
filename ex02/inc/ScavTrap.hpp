@@ -6,7 +6,7 @@
 class ScavTrap : public ClapTrap
 {
     private:
-        bool    _isGuarding = false;
+        bool    _isGuarding;
     public:
         ScavTrap();
         ScavTrap( std::string name );

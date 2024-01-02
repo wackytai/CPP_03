@@ -6,12 +6,12 @@
 class ScavTrap : virtual public ClapTrap
 {
     private:
-        bool    _isGuarding = false;
+        bool    _isGuarding;
     public:
         ScavTrap();
         ScavTrap( std::string name );
         ScavTrap( const ScavTrap &object );
-        ~ScavTrap() override;
+        ~ScavTrap();
         ScavTrap    &operator=( const ScavTrap &object );
         void        attack( const std::string& target );
         void        attack( ScavTrap& target );

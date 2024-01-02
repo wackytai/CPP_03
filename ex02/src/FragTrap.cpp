@@ -1,24 +1,33 @@
 #include "../inc/FragTrap.hpp"
 
-FragTrap::FragTrap() : ClapTrap("", 100, 100, 30)
+FragTrap::FragTrap() : ClapTrap()
 {
-    std::cout << "FragTrap Default Constructor called" << std::endl;
+    setHealth(100);
+    setEnergy(100);
+    setDamage(30);
+    std::cout << getName() << ": " << "FragTrap Default Constructor called" << std::endl;
 }
 
-FragTrap::FragTrap( std::string name ) : ClapTrap(name, 100, 100, 30)
+FragTrap::FragTrap( std::string name ) : ClapTrap(name)
 {
-    std::cout << "FragTrap Custom Constructor called" << std::endl;
+    setHealth(100);
+    setEnergy(100);
+    setDamage(30);
+    std::cout << getName() << ": " << "FragTrap Custom Constructor called" << std::endl;
 }
 
-FragTrap::FragTrap( const FragTrap &object )
+FragTrap::FragTrap( const FragTrap &object ) : ClapTrap()
 {
+    setName(object.getName());
+    setHealth(object.getHealth());
+    setEnergy(object.getEnergy());
+    setDamage(object.getDamage());
     std::cout << "FragTrap Copy Constructor called" << std::endl;
-    *this = object;
 }
 
 FragTrap::~FragTrap()
 {
-    std::cout << "FragTrap Destructor called" << std::endl;
+    std::cout << getName() << ": " << "FragTrap Destructor called" << std::endl;
 }
 
 FragTrap    &FragTrap::operator=( const FragTrap &object )
@@ -51,7 +60,7 @@ void        FragTrap::attack( FragTrap &target )
 
 void        FragTrap::attack( const std::string &target )
 {
-    std::cout << "FragTrap " << _name << " attacks " << target << ", causing " << _damage << " points of damage!" << std::endl;
+    std::cout << "FragTrap " << getName() << " attacks " << target << ", causing " << getDamage() << " points of damage!" << std::endl;
     setEnergy(-1);
     return ;
 }

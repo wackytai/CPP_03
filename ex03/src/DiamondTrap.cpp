@@ -1,24 +1,36 @@
 #include "../inc/DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap() : ClapTrap("", FragTrap::getHealth(), ScavTrap::getEnergy(), FragTrap::getDamage()), _name("_clap_name")
+DiamondTrap::DiamondTrap() : ClapTrap()
 {
-    std::cout << "DiamondTrap Default Constructor called" << std::endl;
+    setHealth(FragTrap::getHealth());
+    setEnergy(ScavTrap::getEnergy());
+    setDamage(FragTrap::getDamage());
+    _name = getName() + "_clap_name";
+    std::cout << getName() << ": " << "DiamondTrap Default Constructor called" << std::endl;
 }
 
-DiamondTrap::DiamondTrap( const DiamondTrap &object )
+DiamondTrap::DiamondTrap( const DiamondTrap &object ) : ClapTrap(), ScavTrap(), FragTrap()
 {
-    *this = object;
+    setName(object.getName());
+    _name = getName() + "_clap_name";
+    setHealth(object.getHealth());
+    setEnergy(object.getEnergy());
+    setDamage(object.getDamage());
     std::cout << "DiamondTrap Copy Constructor called" << std::endl;
 }
 
-DiamondTrap::DiamondTrap( std::string name ) : _name(name + "_clap_trap"), ClapTrap(name, FragTrap::getHealth(), ScavTrap::getEnergy(), FragTrap::getDamage())
+DiamondTrap::DiamondTrap( std::string name ) : ClapTrap(name)
 {
-    std::cout << "DiamondTrap Custom Constructor called" << std::endl;
+    _name = getName() + "_clap_name";
+    setHealth(FragTrap::getHealth());
+    setEnergy(ScavTrap::getEnergy());
+    setDamage(FragTrap::getDamage());
+    std::cout << getName() << ": " << "DiamondTrap Custom Constructor called" << std::endl;
 }
 
-DiamondTrap::~DiamondTrap() override
+DiamondTrap::~DiamondTrap()
 {
-    std::cout << "DiamondTrap Default Destructor called" << std::endl;
+    std::cout << getName() << ": " << "DiamondTrap Default Destructor called" << std::endl;
 }
 
 DiamondTrap &DiamondTrap::operator=( const DiamondTrap &object )

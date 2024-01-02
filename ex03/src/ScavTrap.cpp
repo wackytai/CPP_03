@@ -1,24 +1,36 @@
 #include "../inc/ScavTrap.hpp"
 
-Scavtrap::ScavTrap() : ClapTrap("", 100, 50, 20)
+ScavTrap::ScavTrap() : ClapTrap()
 {
-    std::cout << "ScavTrap Default Constructor called" << std::endl;
+    setHealth(100);
+    setEnergy(50);
+    setDamage(20);
+    _isGuarding = false;
+    std::cout << getName() << ": " << "ScavTrap Default Constructor called" << std::endl;
 }
 
-Scavtrap::ScavTrap(std::string name) : ClapTrap(name, 100, 50, 20)
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
-    std::cout << "ScavTrap Custom Constructor called" << std::endl;
+    setHealth(100);
+    setEnergy(50);
+    setDamage(20);
+    _isGuarding = false;
+    std::cout << getName() << ": " << "ScavTrap Custom Constructor called" << std::endl;
 }
 
-Scavtrap::ScavTrap( const ScavTrap &object )
+ScavTrap::ScavTrap( const ScavTrap &object ) : ClapTrap()
 {
+    setName(object.getName());
+    setHealth(object.getHealth());
+    setEnergy(object.getEnergy());
+    setDamage(object.getDamage());
+    _isGuarding = false;
     std::cout << "ScavTrap Copy Constructor called" << std::endl;
-    *this = object;
 }
 
-Scavtrap::~ScavTrap() override
+ScavTrap::~ScavTrap()
 {
-    std::cout << "ScavTrap Default Destructor called" << std::endl;
+    std::cout << getName() << ": " << "ScavTrap Default Destructor called" << std::endl;
 }
 
 ScavTrap   &ScavTrap::operator=( const ScavTrap &object )
@@ -27,17 +39,18 @@ ScavTrap   &ScavTrap::operator=( const ScavTrap &object )
     setHealth(object.getHealth());
     setEnergy(object.getEnergy());
     setDamage(object.getDamage());
+    _isGuarding = false;
     return  ( *this );
 }
 
-void        ScavTrap::attack( const std::string& target ) override
+void        ScavTrap::attack( const std::string& target )
 {
-    std::cout << "ScavTrap " << _name << " attacks " << target << ", causing " << _damage << " points of damage!" << std::endl;
-    setEnergy(-1);
+    std::cout << "ScavTrap " << getName() << " attacks " << target << ", causing " << getDamage() << " points of damage!" << std::endl;
+    setEnergy(getEnergy() - 1);
     return ;
 }
 
-void        ScavTrap::attack( ScavTrap& target ) override
+void        ScavTrap::attack( ScavTrap& target )
 {
     if (getEnergy() > 0 && target.getHealth() > 0)
     {

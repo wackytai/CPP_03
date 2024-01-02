@@ -2,29 +2,29 @@
 
 ClapTrap::ClapTrap() : _name(""), _hp(10), _energy(10), _damage(0)
 {
-    std::cout << "Default Constructor called" << std::endl;
+    std::cout << "ClapTrap Default Constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap( const ClapTrap& object )
 {
-    std::cout << "Copy Constructor called" << std::endl;
+    std::cout << "ClapTrap Copy Constructor called" << std::endl;
     *this = object;
 }
 
 ClapTrap::ClapTrap( std::string name ) : _name(name), _hp(10), _energy(10), _damage(0)
 {
-    std::cout << "Custom Constructor called" << std::endl;
+    std::cout << name << ": " << "ClapTrap Custom Constructor called" << std::endl;
 }
 
 ClapTrap::~ClapTrap()
 {
-    std::cout << "Default Destructor called" << std::endl;
+    std::cout << getName() << ": " << "ClapTrap Default Destructor called" << std::endl;
 }
 
 void        ClapTrap::attack( const std::string& target )
 {
     std::cout << "ClapTrap " << _name << " attacks " << target << ", causing " << _damage << " points of damage!" << std::endl;
-    setEnergy(-1);
+    setEnergy(getEnergy() - 1);
     return ;
 }
 
@@ -36,16 +36,16 @@ void        ClapTrap::attack( ClapTrap& target )
         target.takeDamage(getDamage());
     }
     else if (getEnergy() <= 0)
-        std::cout << "No energy points left!" << std::endl;
+        std::cout << "Unable to attack. No energy points left!" << std::endl;
     else if (target.getHealth() <= 0)
-        std::cout << "Target has no HP!" << std::endl;
+        std::cout << "Unable to attack. Target has no HP!" << std::endl;
     return ;
 }
 
 void        ClapTrap::takeDamage( unsigned int amount )
 {
-    setHealth(amount * -1);
-    std::cout << "ClapTrap " << _name << " attacked, losing " << _damage << " points of hp!" << std::endl;
+    setHealth(getHealth() - amount);
+    std::cout << "ClapTrap " << _name << " attacked, losing " << amount << " points of hp!" << std::endl;
     return ;
 }
 
@@ -53,12 +53,12 @@ void        ClapTrap::beRepaired( unsigned int amount )
 {
     if (_energy > 0)
     {
-        setHealth(amount);
+        setHealth(getHealth() + amount);
         std::cout << "ClapTrap " << _name << " repaired hp by " << amount << std::endl;
-        setEnergy(-1);
+        setEnergy(getEnergy() - 1);
     }
     else
-        std::cout << "No energy points left!" << std::endl;
+        std::cout << "Unable to repair. No energy points left!" << std::endl;
     return ;
 }
 
@@ -72,22 +72,22 @@ ClapTrap&   ClapTrap::operator=( const ClapTrap& object )
     return ( *this );
 }
 
-std::string     ClapTrap::getName()
+std::string     ClapTrap::getName() const
 {
     return ( _name );
 }
 
-unsigned int    ClapTrap::getHealth()
+unsigned int    ClapTrap::getHealth() const
 {
     return ( _hp );
 }
 
-unsigned int    ClapTrap::getEnergy()
+unsigned int    ClapTrap::getEnergy() const
 {
     return ( _energy );
 }
 
-unsigned int    ClapTrap::getDamage()
+unsigned int    ClapTrap::getDamage() const
 {
     return ( _damage );
 }
@@ -99,15 +99,15 @@ void            ClapTrap::setName( std::string name )
 
 void            ClapTrap::setHealth( unsigned int amount )
 {
-    _hp += amount;
+    _hp = amount;
 }
 
 void            ClapTrap::setEnergy( unsigned int amount )
 {
-    _energy += amount;
+    _energy = amount;
 }
 
 void            ClapTrap::setDamage( unsigned int amount )
 {
-    _damage += amount;
+    _damage = amount;
 }
