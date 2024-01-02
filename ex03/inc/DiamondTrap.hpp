@@ -1,0 +1,20 @@
+#ifndef DIAMOND_HPP
+# define DIAMOND_HPP
+# include "ScavTrap.hpp"
+# include "FragTrap.hpp"
+
+class DiamondTrap: public ScavTrap, public FragTrap
+{
+    private:
+        std::string _name;
+
+    public:
+        DiamondTrap();
+        DiamondTrap( const DiamondTrap &object );
+        DiamondTrap( std::string name );
+        ~DiamondTrap() override;
+        DiamondTrap &operator=( const DiamondTrap &object );
+        void    whoAmI();
+};
+
+#endif
