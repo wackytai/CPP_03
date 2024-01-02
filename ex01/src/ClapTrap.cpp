@@ -45,7 +45,7 @@ void        ClapTrap::attack( ClapTrap& target )
 void        ClapTrap::takeDamage( unsigned int amount )
 {
     setHealth(amount * -1);
-    std::cout << "ClapTrap " << _name << " attacked, losing " << _damage << " points of hp!" << std::endl;
+    std::cout << _name << " attacked, losing " << _damage << " points of hp!" << std::endl;
     return ;
 }
 
@@ -54,11 +54,10 @@ void        ClapTrap::beRepaired( unsigned int amount )
     if (_energy > 0)
     {
         setHealth(amount);
-        std::cout << "ClapTrap " << _name << " repaired hp by " << amount << std::endl;
+        std::cout <<  _name << " repaired hp by " << amount << std::endl;
         setEnergy(-1);
     }
-    else
-        std::cout << "No energy points left!" << std::endl;
+    std::cout << "No energy points left!" << std::endl;
     return ;
 }
 
