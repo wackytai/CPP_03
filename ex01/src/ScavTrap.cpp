@@ -27,7 +27,7 @@ ScavTrap   &ScavTrap::operator=( const ScavTrap &object )
     setHealth(object.getHealth());
     setEnergy(object.getEnergy());
     setDamage(object.getDamage());
-    return ;
+    return  ( *this );
 }
 
 void        ScavTrap::attack( const std::string& target )
