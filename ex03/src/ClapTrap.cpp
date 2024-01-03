@@ -1,29 +1,29 @@
 #include "../inc/ClapTrap.hpp"
 
-ClapTrap::ClapTrap() : _name(""), _hp(10), _energy(10), _damage(0)
+ClapTrap::ClapTrap() : _name("asset"), _hp(10), _energy(10), _damage(0)
 {
-    std::cout << "Default Constructor called" << std::endl;
+    std::cout << "ClapTrap Default Constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap( const ClapTrap& object )
 {
-    std::cout << "Copy Constructor called" << std::endl;
+    std::cout << "ClapTrap Copy Constructor called" << std::endl;
     *this = object;
 }
 
 ClapTrap::ClapTrap( std::string name ) : _name(name), _hp(10), _energy(10), _damage(0)
 {
-    std::cout << name << ": " << "Custom Constructor called" << std::endl;
+    std::cout << name << ": " << "ClapTrap Custom Constructor called" << std::endl;
 }
 
 ClapTrap::~ClapTrap()
 {
-    std::cout << getName() << ": " << "Default Destructor called" << std::endl;
+    std::cout << getName() << ": " << "ClapTrap Default Destructor called" << std::endl;
 }
 
 void        ClapTrap::attack( const std::string& target )
 {
-    std::cout << "ClapTrap " << _name << " attacks " << target << ", causing " << _damage << " points of damage!" << std::endl;
+    std::cout << "ClapTrap " << getName() << " attacks " << target << ", causing " << getDamage() << " points of damage!" << std::endl;
     setEnergy(getEnergy() - 1);
     return ;
 }
@@ -45,7 +45,7 @@ void        ClapTrap::attack( ClapTrap& target )
 void        ClapTrap::takeDamage( unsigned int amount )
 {
     setHealth(getHealth() - amount);
-    std::cout << "ClapTrap " << _name << " attacked, losing " << amount << " points of hp!" << std::endl;
+    std::cout << "ClapTrap " << getName() << " attacked, losing " << amount << " points of hp!" << std::endl;
     return ;
 }
 
@@ -54,7 +54,7 @@ void        ClapTrap::beRepaired( unsigned int amount )
     if (_energy > 0)
     {
         setHealth(getHealth() + amount);
-        std::cout << "ClapTrap " << _name << " repaired hp by " << amount << std::endl;
+        std::cout << "ClapTrap " << getName() << " repaired hp by " << amount << std::endl;
         setEnergy(getEnergy() - 1);
     }
     else
