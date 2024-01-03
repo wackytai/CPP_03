@@ -99,12 +99,18 @@ void            ClapTrap::setName( std::string name )
 
 void            ClapTrap::setHealth( unsigned int amount )
 {
-    _hp = amount;
+    if (amount >= 0)
+        _hp = amount;
+    else
+        _hp = 0;
 }
 
 void            ClapTrap::setEnergy( unsigned int amount )
 {
-    _energy = amount;
+    if (amount >= 0)
+        _energy = amount;
+    else
+        _energy = 0;
 }
 
 void            ClapTrap::setDamage( unsigned int amount )
