@@ -5,6 +5,11 @@ ClapTrap::ClapTrap() : _name("asset"), _hp(10), _energy(10), _damage(0)
     std::cout << "ClapTrap Default Constructor called" << std::endl;
 }
 
+ClapTrap::ClapTrap( std::string name, unsigned int hp, unsigned int e, unsigned int dam ) : _name(name), _hp(hp), _energy(e), _damage(dam)
+{
+    std::cout << "ClapTrap Custom Constructor called" << std::endl;
+}
+
 ClapTrap::ClapTrap( const ClapTrap& object )
 {
     std::cout << "ClapTrap Copy Constructor called" << std::endl;
@@ -23,28 +28,30 @@ ClapTrap::~ClapTrap()
 
 void        ClapTrap::attack( const std::string& target )
 {
-    std::cout << "ClapTrap " << getName() << " attacks " << target << ", causing " << getDamage() << " points of damage!" << std::endl;
-    setEnergy(getEnergy() - 1);
-    return ;
-}
-
-void        ClapTrap::attack( ClapTrap& target )
-{
-    if (getEnergy() > 0 && target.getHealth() > 0)
+        if (getEnergy() > 0)
     {
-        attack(target.getName());
-        target.takeDamage(getDamage());
+        std::cout << "ClapTrap " << getName() << " attacks " << target << ", causing " << getDamage() << " points of damage!" << std::endl;
+        if (getEnergy() > 0)
+            setEnergy(getEnergy() - 1);
+        else
+            setEnergy(0);
     }
     else if (getEnergy() <= 0)
         std::cout << "Unable to attack. No energy points left!" << std::endl;
-    else if (target.getHealth() <= 0)
-        std::cout << "Unable to attack. Target has no HP!" << std::endl;
     return ;
 }
 
 void        ClapTrap::takeDamage( unsigned int amount )
 {
-    setHealth(getHealth() - amount);
+    if (getHealth() == 0)
+    {
+        std::cout << "ClapTrap " << getName() << "has no HP left to take damage! " << std::endl;
+        return ;
+    }
+    if (amount < getHealth())
+        setHealth(getHealth() - amount);
+    else
+        setHealth(0);
     std::cout << "ClapTrap " << getName() << " attacked, losing " << amount << " points of hp!" << std::endl;
     return ;
 }
@@ -55,7 +62,10 @@ void        ClapTrap::beRepaired( unsigned int amount )
     {
         setHealth(getHealth() + amount);
         std::cout << "ClapTrap " << getName() << " repaired hp by " << amount << std::endl;
-        setEnergy(getEnergy() - 1);
+        if (getEnergy() > 0)
+            setEnergy(getEnergy() - 1);
+        else
+            setEnergy(0);
     }
     else
         std::cout << "Unable to repair. No energy points left!" << std::endl;
@@ -99,18 +109,12 @@ void            ClapTrap::setName( std::string name )
 
 void            ClapTrap::setHealth( unsigned int amount )
 {
-    if (amount >= 0)
         _hp = amount;
-    else
-        _hp = 0;
 }
 
 void            ClapTrap::setEnergy( unsigned int amount )
 {
-    if (amount >= 0)
         _energy = amount;
-    else
-        _energy = 0;
 }
 
 void            ClapTrap::setDamage( unsigned int amount )

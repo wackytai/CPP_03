@@ -43,24 +43,18 @@ ScavTrap   &ScavTrap::operator=( const ScavTrap &object )
     return  ( *this );
 }
 
-void        ScavTrap::attack( const std::string& target )
+void    ScavTrap::attack( const std::string& target )
 {
-    std::cout << "ScavTrap " << getName() << " attacks " << target << ", causing " << getDamage() << " points of damage!" << std::endl;
-    setEnergy(getEnergy() - 1);
-    return ;
-}
-
-void        ScavTrap::attack( ScavTrap& target )
-{
-    if (getEnergy() > 0 && target.getHealth() > 0)
+    if (getEnergy() > 0)
     {
-        attack(target.getName());
-        target.takeDamage(getDamage());
+        std::cout << "ScavTrap " << getName() << " attacks " << target << ", causing " << getDamage() << " points of damage!" << std::endl;
+        if (getEnergy() > 0)
+            setEnergy(getEnergy() - 1);
+        else
+            setEnergy(0);
     }
     else if (getEnergy() <= 0)
-        std::cout << "No energy points left!" << std::endl;
-    else if (target.getHealth() <= 0)
-        std::cout << "Target has no HP!" << std::endl;
+        std::cout << "ScavTrap " << getName() << ": Unable to attack. No energy points left!" << std::endl;
     return ;
 }
 

@@ -1,30 +1,20 @@
 #include "../inc/ScavTrap.hpp"
 
-ScavTrap::ScavTrap() : ClapTrap()
+ScavTrap::ScavTrap() : ClapTrap("scav obj", 100, 50, 20)
 {
-    setHealth(100);
-    setEnergy(50);
-    setDamage(20);
     _isGuarding = false;
     std::cout << getName() << ": " << "ScavTrap Default Constructor called" << std::endl;
 }
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name, 100, 50, 20)
 {
-    setHealth(100);
-    setEnergy(50);
-    setDamage(20);
     _isGuarding = false;
     std::cout << getName() << ": " << "ScavTrap Custom Constructor called" << std::endl;
 }
 
-ScavTrap::ScavTrap( const ScavTrap &object ) : ClapTrap()
+ScavTrap::ScavTrap( const ScavTrap &object ) : ClapTrap(object._name, object._hp, object._energy, object._damage)
 {
-    setName(object.getName());
-    setHealth(object.getHealth());
-    setEnergy(object.getEnergy());
-    setDamage(object.getDamage());
-    _isGuarding = false;
+    _isGuarding = object._isGuarding;
     std::cout << "ScavTrap Copy Constructor called" << std::endl;
 }
 
@@ -33,35 +23,29 @@ ScavTrap::~ScavTrap()
     std::cout << getName() << ": " << "ScavTrap Default Destructor called" << std::endl;
 }
 
-ScavTrap   &ScavTrap::operator=( const ScavTrap &object )
+void    ScavTrap::attack( const std::string& target )
 {
-    setName(object.getName());
-    setHealth(object.getHealth());
-    setEnergy(object.getEnergy());
-    setDamage(object.getDamage());
-    _isGuarding = false;
-    return  ( *this );
-}
-
-void        ScavTrap::attack( const std::string& target )
-{
-    std::cout << "ScavTrap " << getName() << " attacks " << target << ", causing " << getDamage() << " points of damage!" << std::endl;
-    setEnergy(getEnergy() - 1);
-    return ;
-}
-
-void        ScavTrap::attack( ScavTrap& target )
-{
-    if (getEnergy() > 0 && target.getHealth() > 0)
+    if (getEnergy() > 0)
     {
-        attack(target.getName());
-        target.takeDamage(getDamage());
+        std::cout << "ScavTrap " << getName() << " attacks " << target << ", causing " << getDamage() << " points of damage!" << std::endl;
+        if (getEnergy() > 0)
+            setEnergy(getEnergy() - 1);
+        else
+            setEnergy(0);
     }
     else if (getEnergy() <= 0)
-        std::cout << "No energy points left!" << std::endl;
-    else if (target.getHealth() <= 0)
-        std::cout << "Target has no HP!" << std::endl;
+        std::cout << "ScavTrap " << getName() << ": Unable to attack. No energy points left!" << std::endl;
     return ;
+}
+
+ScavTrap   &ScavTrap::operator=( const ScavTrap &object )
+{
+    setName(object._name);
+    setHealth(object._hp);
+    setEnergy(object._energy);
+    setDamage(object._damage);
+    _isGuarding = object._isGuarding;
+    return  ( *this );
 }
 
 void    ScavTrap::guardGate()

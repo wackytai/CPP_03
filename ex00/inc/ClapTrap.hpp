@@ -13,11 +13,11 @@ class ClapTrap
 
     public:
         ClapTrap();
+        ClapTrap( std::string name, unsigned int hp, unsigned int e, unsigned int dam );
         ClapTrap( const ClapTrap& object );
         ClapTrap( std::string name );
         ~ClapTrap();
         void            attack( const std::string& target );
-        void            attack( ClapTrap& target );
         void            takeDamage( unsigned int amount );
         void            beRepaired( unsigned int amount );
         ClapTrap&       operator=( const ClapTrap& object );

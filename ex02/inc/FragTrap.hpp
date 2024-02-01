@@ -11,7 +11,6 @@ class FragTrap: public ClapTrap
         ~FragTrap();
         FragTrap    &operator=( const FragTrap &object );
         void        highFivesGuys(void);
-        void        attack( FragTrap &target );
         void        attack( const std::string &target );
 };
 

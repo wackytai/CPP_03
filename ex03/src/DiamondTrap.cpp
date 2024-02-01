@@ -1,6 +1,6 @@
 #include "../inc/DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap() : ClapTrap()
+DiamondTrap::DiamondTrap() : ClapTrap(), ScavTrap(), FragTrap()
 {
     setHealth(FragTrap::getHealth());
     setEnergy(ScavTrap::getEnergy());

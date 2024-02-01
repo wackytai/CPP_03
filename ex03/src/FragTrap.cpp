@@ -1,27 +1,17 @@
 #include "../inc/FragTrap.hpp"
 
-FragTrap::FragTrap() : ClapTrap()
+FragTrap::FragTrap() : ClapTrap("frag obj", 100, 100, 30)
 {
-    setHealth(100);
-    setEnergy(100);
-    setDamage(30);
     std::cout << getName() << ": " << "FragTrap Default Constructor called" << std::endl;
 }
 
-FragTrap::FragTrap( std::string name ) : ClapTrap(name)
+FragTrap::FragTrap( std::string name ) : ClapTrap(name, 100, 100, 30)
 {
-    setHealth(100);
-    setEnergy(100);
-    setDamage(30);
     std::cout << getName() << ": " << "FragTrap Custom Constructor called" << std::endl;
 }
 
-FragTrap::FragTrap( const FragTrap &object ) : ClapTrap()
+FragTrap::FragTrap( const FragTrap &object ) : ClapTrap(object._name, object._hp, object._energy, object._damage)
 {
-    setName(object.getName());
-    setHealth(object.getHealth());
-    setEnergy(object.getEnergy());
-    setDamage(object.getDamage());
     std::cout << "FragTrap Copy Constructor called" << std::endl;
 }
 
@@ -44,23 +34,17 @@ void    FragTrap::highFivesGuys(void)
     std::cout << "FragTrap requests a positive high fives" << std::endl;
 }
 
-void        FragTrap::attack( FragTrap &target )
-{
-    if (getEnergy() > 0 && target.getHealth() > 0)
-    {
-        attack(target.getName());
-        target.takeDamage(getDamage());
-    }
-    else if (getEnergy() <= 0)
-        std::cout << "Unable to attack. No energy points left!" << std::endl;
-    else if (target.getHealth() <= 0)
-        std::cout << "Unable to attack. Target has no HP!" << std::endl;
-    return ;
-}
-
 void        FragTrap::attack( const std::string &target )
 {
-    std::cout << "FragTrap " << getName() << " attacks " << target << ", causing " << getDamage() << " points of damage!" << std::endl;
-    setEnergy(-1);
+    if (getEnergy() > 0)
+    {
+        std::cout << "FragTrap " << getName() << " attacks " << target << ", causing " << getDamage() << " points of damage!" << std::endl;
+        if (getEnergy() > 0)
+            setEnergy(getEnergy() - 1);
+        else
+            setEnergy(0);
+    }
+    else if (getEnergy() <= 0)
+        std::cout << "FragTrap " << getName() << ": Unable to attack. No energy points left!" << std::endl;
     return ;
 }
