@@ -4,6 +4,11 @@
 
 class FragTrap: virtual public ClapTrap
 {
+    protected:
+        static const int    HP;
+        static const int    EN;
+        static const int    DAM;
+
     public:
         FragTrap();
         FragTrap( std::string name );

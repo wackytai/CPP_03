@@ -5,17 +5,18 @@
 
 class ClapTrap
 {
-    private:
-        std::string     _name;
-        unsigned int    _hp;
-        unsigned int    _energy;
-        unsigned int    _damage;
-        static const int HIT_POINTS;
-        static const int ENERGY_POINTS;
-        static const int ATTACK_DAMAGE;
+    protected:
+        std::string         _name;
+        unsigned int        _hp;
+        unsigned int        _energy;
+        unsigned int        _damage;
+        static const int    HP;
+        static const int    EN;
+        static const int    DAM;
 
     public:
         ClapTrap();
+        ClapTrap( std::string name, unsigned int hp, unsigned int e, unsigned int dam );
         ClapTrap( const ClapTrap &object );
         ClapTrap( std::string name );
         virtual ~ClapTrap();

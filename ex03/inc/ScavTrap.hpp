@@ -5,8 +5,12 @@
 
 class ScavTrap : virtual public ClapTrap
 {
-    private:
+    protected:
         bool    _isGuarding;
+        static const int    HP;
+        static const int    EN;
+        static const int    DAM;
+
     public:
         ScavTrap();
         ScavTrap( std::string name );

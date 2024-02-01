@@ -1,18 +1,22 @@
 #include "../inc/FragTrap.hpp"
 
-FragTrap::FragTrap() : ClapTrap("frag obj", 100, 100, 30)
+const int   FragTrap::HP = 100;
+const int   FragTrap::EN = 100;
+const int   FragTrap::DAM = 30;
+
+FragTrap::FragTrap() : ClapTrap("frag obj", FragTrap::HP, FragTrap::EN, FragTrap::DAM)
 {
     std::cout << getName() << ": " << "FragTrap Default Constructor called" << std::endl;
 }
 
-FragTrap::FragTrap( std::string name ) : ClapTrap(name, 100, 100, 30)
+FragTrap::FragTrap( std::string name ) : ClapTrap(name, FragTrap::HP, FragTrap::EN, FragTrap::DAM)
 {
     std::cout << getName() << ": " << "FragTrap Custom Constructor called" << std::endl;
 }
 
 FragTrap::FragTrap( const FragTrap &object ) : ClapTrap(object._name, object._hp, object._energy, object._damage)
 {
-    std::cout << "FragTrap Copy Constructor called" << std::endl;
+    std::cout << getName() << ": " << "FragTrap Copy Constructor called" << std::endl;
 }
 
 FragTrap::~FragTrap()

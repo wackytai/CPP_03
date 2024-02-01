@@ -1,12 +1,17 @@
 #include "../inc/ClapTrap.hpp"
 
-const int ClapTrap::HIT_POINTS = 10;
-const int ClapTrap::ENERGY_POINTS = 10;
-const int ClapTrap::ATTACK_DAMAGE = 0;
+const int ClapTrap::HP = 10;
+const int ClapTrap::EN = 10;
+const int ClapTrap::DAM = 10;
 
-ClapTrap::ClapTrap() : _name("asset"), _hp(ClapTrap::HIT_POINTS), _energy(ClapTrap::ENERGY_POINTS), _damage(ClapTrap::ATTACK_DAMAGE)
+ClapTrap::ClapTrap() : _name("asset"), _hp(10), _energy(10), _damage(0)
 {
     std::cout << "ClapTrap Default Constructor called" << std::endl;
+}
+
+ClapTrap::ClapTrap( std::string name, unsigned int hp, unsigned int e, unsigned int dam ) : _name(name), _hp(hp), _energy(e), _damage(dam)
+{
+    std::cout << "ClapTrap Custom Constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap( const ClapTrap& object )
@@ -61,7 +66,10 @@ void        ClapTrap::beRepaired( unsigned int amount )
     {
         setHealth(getHealth() + amount);
         std::cout << "ClapTrap " << getName() << " repaired hp by " << amount << std::endl;
-        setEnergy(getEnergy() - 1);
+        if (getEnergy() > 0)
+            setEnergy(getEnergy() - 1);
+        else
+            setEnergy(0);
     }
     else
         std::cout << "Unable to repair. No energy points left!" << std::endl;
@@ -105,18 +113,12 @@ void            ClapTrap::setName( std::string name )
 
 void            ClapTrap::setHealth( unsigned int amount )
 {
-    if (amount >= 0)
         _hp = amount;
-    else
-        _hp = 0;
 }
 
 void            ClapTrap::setEnergy( unsigned int amount )
 {
-    if (amount >= 0)
         _energy = amount;
-    else
-        _energy = 0;
 }
 
 void            ClapTrap::setDamage( unsigned int amount )

@@ -1,30 +1,24 @@
 #include "../inc/ScavTrap.hpp"
 
-ScavTrap::ScavTrap() : ClapTrap()
+const int ScavTrap::HP = 100;
+const int ScavTrap::EN = 50;
+const int ScavTrap::DAM = 20;
+
+ScavTrap::ScavTrap() : ClapTrap("scav obj", ScavTrap::HP, ScavTrap::EN, ScavTrap::DAM)
 {
-    setHealth(100);
-    setEnergy(50);
-    setDamage(20);
     _isGuarding = false;
     std::cout << getName() << ": " << "ScavTrap Default Constructor called" << std::endl;
 }
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name, ScavTrap::HP, ScavTrap::EN, ScavTrap::DAM)
 {
-    setHealth(100);
-    setEnergy(50);
-    setDamage(20);
     _isGuarding = false;
     std::cout << getName() << ": " << "ScavTrap Custom Constructor called" << std::endl;
 }
 
-ScavTrap::ScavTrap( const ScavTrap &object ) : ClapTrap()
+ScavTrap::ScavTrap( const ScavTrap &object ) : ClapTrap(object._name, object._hp, object._energy, object._damage)
 {
-    setName(object.getName());
-    setHealth(object.getHealth());
-    setEnergy(object.getEnergy());
-    setDamage(object.getDamage());
-    _isGuarding = false;
+    _isGuarding = object._isGuarding;
     std::cout << "ScavTrap Copy Constructor called" << std::endl;
 }
 
@@ -39,7 +33,7 @@ ScavTrap   &ScavTrap::operator=( const ScavTrap &object )
     setHealth(object.getHealth());
     setEnergy(object.getEnergy());
     setDamage(object.getDamage());
-    _isGuarding = false;
+    _isGuarding = object._isGuarding;
     return  ( *this );
 }
 
