@@ -10,11 +10,11 @@ int main(void)
 	DiamondTrap	c4;
 	
 	c4 = c2;
-	c1.showStats();
+/* 	c1.showStats();
 	c2.showStats();
 	c3.showStats();
-	c4.showStats();
-/* 	for (int i = 0; i < 5; i++)
+	c4.showStats(); */
+	for (int i = 0; i < 5; i++)
 	{
 		c1.attack(c2.getName());
 		c2.takeDamage(c2.getDamage());		
@@ -33,6 +33,6 @@ int main(void)
 	c3.beRepaired(1);
 	c3.attack(c4.getName());
 	c3.highFivesGuys();
-	c3.whoAmI(); */
+	c3.whoAmI();
 	return (0);
 }
